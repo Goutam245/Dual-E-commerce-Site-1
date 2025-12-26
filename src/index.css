@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ASCENDRX Brand Colors */
+    --background: 220 20% 97%;
+    --foreground: 218 50% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 218 50% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 218 50% 15%;
+
+    /* Deep Navy Blue - Trust, Science, Depth */
+    --primary: 218 75% 15%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Platinum Silver - Precision, Clarity */
+    --secondary: 220 10% 92%;
+    --secondary-foreground: 218 50% 15%;
+
+    /* Soft Gray - Backgrounds */
+    --muted: 220 20% 97%;
+    --muted-foreground: 218 20% 46%;
+
+    /* Electric Cyan - Innovation, Transformation */
+    --accent: 187 100% 50%;
+    --accent-foreground: 218 75% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 187 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom Brand Variables */
+    --navy: 218 75% 15%;
+    --navy-light: 218 50% 25%;
+    --platinum: 220 10% 92%;
+    --cyan: 187 100% 50%;
+    --cyan-glow: 187 100% 60%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(218 75% 12%) 0%, hsl(218 50% 20%) 50%, hsl(220 30% 25%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(187 100% 50%) 0%, hsl(218 75% 25%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 98%) 100%);
+    --gradient-shine: linear-gradient(90deg, transparent 0%, hsl(0 0% 100% / 0.2) 50%, transparent 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(218 75% 15% / 0.08);
+    --shadow-md: 0 8px 24px -8px hsl(218 75% 15% / 0.12);
+    --shadow-lg: 0 16px 48px -12px hsl(218 75% 15% / 0.18);
+    --shadow-glow: 0 0 40px -10px hsl(187 100% 50% / 0.4);
+    --shadow-card: 0 4px 20px -4px hsl(218 75% 15% / 0.08);
+    --shadow-card-hover: 0 12px 32px -8px hsl(218 75% 15% / 0.15);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 218 75% 8%;
+    --foreground: 220 20% 95%;
+
+    --card: 218 60% 12%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 218 60% 12%;
+    --popover-foreground: 220 20% 95%;
+
+    --primary: 187 100% 50%;
+    --primary-foreground: 218 75% 10%;
+
+    --secondary: 218 50% 18%;
+    --secondary-foreground: 220 20% 95%;
+
+    --muted: 218 50% 15%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 187 100% 50%;
+    --accent-foreground: 218 75% 10%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 218 40% 20%;
+    --input: 218 40% 20%;
+    --ring: 187 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', system-ui, sans-serif;
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Glowing CTA Button */
+  .btn-glow {
+    @apply relative overflow-hidden transition-all duration-300;
+    background: var(--gradient-cta);
+  }
+
+  .btn-glow::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: var(--gradient-shine);
+    animation: shine 2s infinite;
+  }
+
+  .btn-glow:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-glow:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+  }
+
+  /* Card Hover Effect */
+  .card-lift {
+    @apply transition-all duration-300 ease-out;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-lift:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+  }
+
+  /* Text Gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background: var(--gradient-cta);
+  }
+
+  /* Underline Animation */
+  .underline-animate {
+    @apply relative;
+  }
+
+  .underline-animate::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-500;
+    background: hsl(var(--cyan));
+  }
+
+  .underline-animate:hover::after {
+    @apply w-full;
+  }
+
+  /* Floating Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  /* Pulse Glow */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply backdrop-blur-xl;
+    background: hsl(0 0% 100% / 0.8);
+    border: 1px solid hsl(0 0% 100% / 0.2);
+  }
+
+  /* Skeleton Loading */
+  .skeleton {
+    @apply relative overflow-hidden bg-muted;
+  }
+
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.4), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px -5px hsl(187 100% 50% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px -5px hsl(187 100% 50% / 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+/* Staggered Animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
